@@ -19,11 +19,14 @@ export class PostComponent implements OnInit {
     // separate parameter
     let hashtagList = '';
     const hashTags = this.tweetContent.match(/(#\w+)/g);
-    hashtagList = hashTags.join(',');
-    hashtagList = hashtagList.replace('#', '');
-    this.tweetContent = this.tweetContent.replace(/(#\w+)/g, '');
+    if (hashTags) {
+      hashtagList = hashTags.join(',');
+      hashtagList = hashtagList.replace('#', '');
+      this.tweetContent = this.tweetContent.replace(/(#\w+)/g, '');
+    }
     // build the url string
-    const text = 'https://twitter.com/intent/tweet?text=' + encodeURI(this.tweetContent) + '&hashtags=' + encodeURI(hashtagList);
+    const text = 'https://twitter.com/intent/tweet?text=' + encodeURI(this.tweetContent) +
+      (hashTags ? '&hashtags=' + encodeURI(hashtagList) : '');
     // redirect the user to the twitter form
     window.location.href = text;
   }
