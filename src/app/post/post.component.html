@@ -1,0 +1,12 @@
+<div class="row">
+  <form (ngSubmit)="onTweetSubmit()" #twitterForm="ngForm" class="form col-md-offset-3 col-md-6">
+    <div class="input-group">
+      <label for="twitter-input">What's happening? ({{ 140 - tweetContent.length }} characters remaining)</label>
+      <textarea [(ngModel)]="tweetContent" name="twitter-input" id="twitter-input" cols="30" rows="3" class="form-control"  placeholder="#OneForty4Lyfe"></textarea>
+    </div>
+    <button type="submit" class="btn btn-info" [disabled]="tweetContent.length > 140">Tweet</button>
+  </form>
+</div>
+<div class="row">
+  <h3 *ngIf="tweetContent?.length > 140">Woah, woah, woah there buddy. What year do you think it is, 2017? Get that tweet back down to 140 characters.</h3>
+</div>
